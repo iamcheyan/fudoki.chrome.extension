@@ -1,0 +1,77 @@
+{
+  "name": "cmu-pronouncing-dictionary",
+  "version": "3.0.0",
+  "description": "The 134,000+ words and their pronunciations in the CMU pronouncing dictionary",
+  "license": "ISC",
+  "keywords": [
+    "english",
+    "language",
+    "words",
+    "arpabet",
+    "transcription",
+    "spelling",
+    "cmu",
+    "dictionary",
+    "rhyme"
+  ],
+  "repository": "words/cmu-pronouncing-dictionary",
+  "bugs": "https://github.com/words/cmu-pronouncing-dictionary/issues",
+  "author": "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)",
+  "contributors": [
+    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)",
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+    "Christian Murphy <christian.murphy.42@gmail.com>"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "devDependencies": {
+    "@types/tape": "^4.0.0",
+    "bail": "^2.0.0",
+    "concat-stream": "^2.0.0",
+    "prettier": "^2.0.0",
+    "remark-cli": "^9.0.0",
+    "remark-preset-wooorm": "^8.0.0",
+    "rimraf": "^3.0.2",
+    "tape": "^5.2.2",
+    "type-coverage": "^2.0.0",
+    "typescript": "~4.3.0",
+    "xo": "^0.40.0"
+  },
+  "scripts": {
+    "generate": "node build",
+    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
+    "test-api": "node test",
+    "test-types": "rimraf \"*.d.ts\" && tsc && type-coverage",
+    "test": "npm run format && npm run test-api && npm run test-types",
+    "prepublishOnly": "npm run generate && npm run test"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true,
+    "ignore": [
+      "index.js"
+    ]
+  },
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fudoki.chrome.extension</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>fudoki.chrome.extension</h1>
+
+    <div class="setting-group">
+      <label>Type</label>
+      <div class="toggle-group">
+        <label>
+          <input type="radio" name="mode" value="hiragana" checked>
+          <span>ひらがな</span>
+        </label>
+        <label>
+          <input type="radio" name="mode" value="katakana">
+          <span>カタカナ</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <label>Size</label>
+      <div class="range-container">
+        <input type="range" id="fontSize" min="30" max="100" value="50">
+        <span id="fontSizeVal">50%</span>
+      </div>
+    </div>
+
+
+    <div class="setting-group">
+      <label>This Site</label>
+      <select id="sitePreference">
+        <option value="default">Use Global Setting</option>
+        <option value="always">Always Enable</option>
+        <option value="never">Never Enable</option>
+      </select>
+      <div class="site-info" id="currentSite"></div>
+    </div>
+
+    <div class="setting-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="englishMode">
+        <span>English → Katakana</span>
+      </label>
+    </div>
+
+    <button id="settingsBtn">⚙️ Manage Sites</button>
+    <button id="applyBtn">Apply to Page</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>

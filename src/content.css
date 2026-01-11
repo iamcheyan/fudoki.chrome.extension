@@ -1,0 +1,353 @@
+/* Base styles for Furigana extension */
+.furigana-wrapper ruby {
+    font-family: inherit;
+}
+
+.furigana-wrapper rt {
+    user-select: none;
+    /* Prevent selecting furigana text when copying */
+    font-feature-settings: "rubi" 1;
+}
+
+/* Floating button for text selection */
+#furigana-float-btn {
+    position: fixed;
+    z-index: 2147483647;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 8px 24px rgba(124, 58, 237, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        0 0 0 0 rgba(124, 58, 237, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: scale(0.5) translateY(10px);
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+}
+
+#furigana-float-btn.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 24px rgba(124, 58, 237, 0.4),
+            0 4px 12px rgba(0, 0, 0, 0.3),
+            0 0 0 0 rgba(124, 58, 237, 0.4);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 24px rgba(124, 58, 237, 0.6),
+            0 4px 12px rgba(0, 0, 0, 0.3),
+            0 0 0 8px rgba(124, 58, 237, 0.2);
+    }
+}
+
+#furigana-float-btn:hover {
+    transform: scale(1.15) translateY(-2px);
+    box-shadow:
+        0 12px 32px rgba(124, 58, 237, 0.6),
+        0 6px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 0 rgba(124, 58, 237, 0.4);
+}
+
+#furigana-float-btn:active {
+    transform: scale(0.95);
+}
+
+#furigana-float-btn::before {
+    content: 'あ';
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+
+/* Tooltip */
+#furigana-float-btn::after {
+    content: 'Add Furigana';
+    position: absolute;
+    bottom: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#furigana-float-btn:hover::after {
+    opacity: 1;
+}
+
+/* Floating popup window */
+#furigana-popup {
+    position: fixed;
+    z-index: 2147483646;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(42, 42, 42, 0.98) 100%);
+    border: 2px solid rgba(124, 58, 237, 0.3);
+    border-radius: 16px;
+    padding: 20px 24px;
+    min-width: 300px;
+    max-width: 800px;
+    min-height: 200px;
+    resize: both;
+    overflow: auto;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 8px 24px rgba(124, 58, 237, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#furigana-popup.light-theme {
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid #000000;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+#furigana-popup.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+#furigana-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+    cursor: move;
+    user-select: none;
+}
+
+#furigana-popup.light-theme #furigana-popup-header {
+    border-bottom: 2px solid #000000;
+}
+
+#furigana-popup-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    cursor: move;
+}
+
+#furigana-popup.light-theme #furigana-popup-title {
+    color: #000;
+    background: none;
+    -webkit-text-fill-color: #000;
+}
+
+#furigana-popup-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#furigana-popup-theme-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 16px;
+}
+
+#furigana-popup.light-theme #furigana-popup-theme-toggle {
+    background: #f5f5f5;
+    border: 2px solid #000;
+}
+
+#furigana-popup-theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(180deg);
+}
+
+#furigana-popup.light-theme #furigana-popup-theme-toggle:hover {
+    background: #e5e5e5;
+}
+
+#furigana-popup-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: #999;
+    font-size: 20px;
+    line-height: 1;
+}
+
+#furigana-popup.light-theme #furigana-popup-close {
+    background: #f5f5f5;
+    border: 2px solid #000;
+    color: #000;
+}
+
+#furigana-popup-close:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+    transform: rotate(90deg);
+}
+
+#furigana-popup.light-theme #furigana-popup-close:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: white;
+}
+
+#furigana-popup-font-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#furigana-popup.light-theme #furigana-popup-font-control {
+    background: #f5f5f5;
+    border: 2px solid #000;
+}
+
+#furigana-popup-font-label {
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 30px;
+}
+
+#furigana-popup.light-theme #furigana-popup-font-label {
+    color: #666;
+}
+
+#furigana-popup-font-slider {
+    flex: 1;
+    height: 2px;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#furigana-popup.light-theme #furigana-popup-font-slider {
+    background: #000;
+}
+
+#furigana-popup-font-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ec4899;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+#furigana-popup.light-theme #furigana-popup-font-slider::-webkit-slider-thumb {
+    background: #000;
+    border: 2px solid #000;
+}
+
+#furigana-popup-font-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ec4899;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+#furigana-popup.light-theme #furigana-popup-font-slider::-moz-range-thumb {
+    background: #000;
+    border: 2px solid #000;
+}
+
+#furigana-popup-font-value {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 35px;
+    text-align: right;
+}
+
+#furigana-popup.light-theme #furigana-popup-font-value {
+    color: #000;
+}
+
+#furigana-popup-content {
+    font-size: 18px;
+    line-height: 2;
+    color: #fff;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+
+#furigana-popup.light-theme #furigana-popup-content {
+    color: #000;
+}
+
+#furigana-popup-content ruby {
+    font-family: inherit;
+}
+
+#furigana-popup-content rt {
+    font-size: 0.5em;
+    color: #ec4899;
+    font-weight: 500;
+}
+
+#furigana-popup.light-theme #furigana-popup-content rt {
+    color: #7c3aed;
+}

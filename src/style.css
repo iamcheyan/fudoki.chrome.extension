@@ -1,0 +1,277 @@
+:root {
+  --bg-white: #ffffff;
+  --bg-light: #fafafa;
+  --text-black: #1a1a1a;
+  --text-gray: #666666;
+  --border-black: #000000;
+  --border-gray: #cccccc;
+  --border-light: #e5e5e5;
+  --accent-black: #000000;
+  --hover-bg: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  width: 320px;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-white);
+  color: var(--text-black);
+  font-size: 13px;
+}
+
+.container {
+  padding: 16px;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  text-align: center;
+  color: var(--text-black);
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-black);
+  padding-bottom: 12px;
+}
+
+.setting-group {
+  margin-bottom: 12px;
+  background: var(--bg-white);
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-black);
+}
+
+.setting-group label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-white);
+  padding: 0;
+  border-radius: 0;
+}
+
+.toggle-group label {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  border: 2px solid var(--border-black);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text-black);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-white);
+}
+
+.toggle-group label:hover {
+  background: var(--hover-bg);
+}
+
+.toggle-group input[type="radio"] {
+  display: none;
+}
+
+.toggle-group input[type="radio"]:checked+span {
+  background: var(--accent-black);
+  color: white;
+  font-weight: 600;
+}
+
+.toggle-group span {
+  display: block;
+}
+
+.range-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+input[type="range"] {
+  flex: 1;
+  height: 2px;
+  border-radius: 0;
+  background: var(--border-black);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: var(--accent-black);
+  cursor: pointer;
+  border: 2px solid var(--border-black);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: var(--accent-black);
+  cursor: pointer;
+  border: 2px solid var(--border-black);
+}
+
+#fontSizeVal {
+  min-width: 40px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--text-black);
+  font-size: 14px;
+}
+
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 0;
+  border: 2px solid var(--border-black);
+  background: var(--bg-white);
+  color: var(--text-black);
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+select:hover {
+  background: var(--hover-bg);
+}
+
+select:focus {
+  border-color: var(--border-black);
+  background: var(--bg-light);
+}
+
+.site-info {
+  font-size: 10px;
+  color: var(--text-gray);
+  margin-top: 6px;
+  font-family: monospace;
+  border-top: 1px solid var(--border-light);
+  padding-top: 6px;
+}
+
+.checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0 !important;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 0;
+  transition: background 0.2s;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  color: var(--text-black) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.checkbox-label:hover {
+  background: var(--hover-bg);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent-black);
+  border: 2px solid var(--border-black);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-white);
+  color: var(--text-black);
+  border: 2px solid var(--border-black);
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background: var(--accent-black);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+#settingsBtn {
+  background: var(--bg-white);
+  border: 2px solid var(--border-black);
+  color: var(--text-black);
+  font-weight: 600;
+}
+
+#settingsBtn:hover {
+  background: var(--hover-bg);
+  color: var(--text-black);
+  box-shadow: none;
+}
+
+#applyBtn {
+  background: var(--accent-black);
+  color: white;
+  font-weight: 700;
+  border: 2px solid var(--border-black);
+}
+
+#applyBtn:hover {
+  background: var(--text-black);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+  border-left: 1px solid var(--border-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-black);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-black);
+}
