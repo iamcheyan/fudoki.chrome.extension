@@ -71,7 +71,6 @@ h1 {
   padding: 8px;
   border: 2px solid var(--border-black);
   cursor: pointer;
-  transition: all 0.2s;
   margin: 0;
   text-transform: none;
   letter-spacing: normal;
@@ -153,7 +152,6 @@ select {
   font-size: 13px;
   cursor: pointer;
   outline: none;
-  transition: all 0.2s;
   font-weight: 500;
 }
 
@@ -183,7 +181,6 @@ select:focus {
   cursor: pointer;
   padding: 10px;
   border-radius: 0;
-  transition: background 0.2s;
   text-transform: none !important;
   letter-spacing: normal !important;
   color: var(--text-black) !important;
@@ -213,7 +210,6 @@ button {
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s;
   margin-bottom: 8px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -222,13 +218,10 @@ button {
 button:hover {
   background: var(--accent-black);
   color: white;
-  transform: translateY(-1px);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 button:active {
-  transform: translateY(0);
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  background: #333;
 }
 
 #settingsBtn {
@@ -253,8 +246,6 @@ button:active {
 
 #applyBtn:hover {
   background: var(--text-black);
-  transform: translateY(-2px);
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Scrollbar styling */

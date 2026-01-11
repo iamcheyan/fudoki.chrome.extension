@@ -91,7 +91,7 @@ const updateStyles = (settings) => {
 
     if (displayMode === 'hover') {
         css += `
-      .furigana-wrapper ruby rt { opacity: 0; transition: opacity 0.2s; }
+      .furigana-wrapper ruby rt { opacity: 0; }
       .furigana-wrapper ruby:hover rt { opacity: 1; }
     `;
     } else {
@@ -648,17 +648,10 @@ const createFloatingPopup = () => {
     let initialY;
 
     header.addEventListener('mousedown', (e) => {
-        // Don't drag if clicking on controls
-        if (e.target.closest('#furigana-popup-controls')) {
-            return;
-        }
-
+        if (e.target.closest('#furigana-popup-controls')) return;
         isDragging = true;
         initialX = e.clientX - (floatingPopup.offsetLeft || 0);
         initialY = e.clientY - (floatingPopup.offsetTop || 0);
-
-        // Disable transition during drag
-        floatingPopup.style.transition = 'none';
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -666,7 +659,6 @@ const createFloatingPopup = () => {
             e.preventDefault();
             currentX = e.clientX - initialX;
             currentY = e.clientY - initialY;
-
             floatingPopup.style.left = currentX + 'px';
             floatingPopup.style.top = currentY + 'px';
             floatingPopup.style.transform = 'none';
@@ -674,11 +666,7 @@ const createFloatingPopup = () => {
     });
 
     document.addEventListener('mouseup', () => {
-        if (isDragging) {
-            isDragging = false;
-            // Re-enable transition
-            floatingPopup.style.transition = 'opacity 0.3s, transform 0.3s';
-        }
+        isDragging = false;
     });
 
     // Close button only
@@ -754,10 +742,7 @@ const showFuriganaPopup = async (text) => {
             floatingPopup.style.transform = 'translate(-50%, -50%) scale(0.9)';
 
             // Show popup
-            setTimeout(() => {
-                floatingPopup.classList.add('show');
-                floatingPopup.style.transform = 'translate(-50%, -50%) scale(1)';
-            }, 10);
+            floatingPopup.classList.add('show');
 
         } catch (e) {
             console.error('Furigana Extension: Error showing popup', e);

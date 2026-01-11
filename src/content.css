@@ -13,90 +13,60 @@
 #furigana-float-btn {
     position: fixed;
     z-index: 2147483647;
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    background: #000000;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow:
-        0 8px 24px rgba(124, 58, 237, 0.4),
-        0 4px 12px rgba(0, 0, 0, 0.3),
-        0 0 0 0 rgba(124, 58, 237, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    transform: scale(0.5) translateY(10px);
     pointer-events: none;
-    backdrop-filter: blur(10px);
 }
 
 #furigana-float-btn.show {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+    opacity: 0.9;
     pointer-events: auto;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        box-shadow:
-            0 8px 24px rgba(124, 58, 237, 0.4),
-            0 4px 12px rgba(0, 0, 0, 0.3),
-            0 0 0 0 rgba(124, 58, 237, 0.4);
-    }
-
-    50% {
-        box-shadow:
-            0 8px 24px rgba(124, 58, 237, 0.6),
-            0 4px 12px rgba(0, 0, 0, 0.3),
-            0 0 0 8px rgba(124, 58, 237, 0.2);
-    }
 }
 
 #furigana-float-btn:hover {
-    transform: scale(1.15) translateY(-2px);
-    box-shadow:
-        0 12px 32px rgba(124, 58, 237, 0.6),
-        0 6px 16px rgba(0, 0, 0, 0.4),
-        0 0 0 0 rgba(124, 58, 237, 0.4);
+    opacity: 1;
+    background: #1a1a1a;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 #furigana-float-btn:active {
-    transform: scale(0.95);
+    background: #333;
 }
 
 #furigana-float-btn::before {
     content: 'あ';
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
 }
 
-/* Tooltip */
+/* Tooltip - keeping it very minimal */
 #furigana-float-btn::after {
     content: 'Add Furigana';
     position: absolute;
-    bottom: -38px;
+    bottom: -30px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.95);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 12px;
+    background: #000;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #furigana-float-btn:hover::after {
@@ -122,9 +92,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     opacity: 0;
-    transform: scale(0.9) translateY(-10px);
     pointer-events: none;
-    transition: opacity 0.3s, transform 0.3s;
 }
 
 #furigana-popup.light-theme {
@@ -137,7 +105,6 @@
 
 #furigana-popup.show {
     opacity: 1;
-    transform: scale(1) translateY(0);
     pointer-events: auto;
 }
 
@@ -189,7 +156,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
     font-size: 16px;
 }
 
@@ -200,7 +166,6 @@
 
 #furigana-popup-theme-toggle:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: rotate(180deg);
 }
 
 #furigana-popup.light-theme #furigana-popup-theme-toggle:hover {
@@ -217,7 +182,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
     color: #999;
     font-size: 20px;
     line-height: 1;
@@ -233,7 +197,6 @@
     background: rgba(239, 68, 68, 0.2);
     border-color: #ef4444;
     color: #ef4444;
-    transform: rotate(90deg);
 }
 
 #furigana-popup.light-theme #furigana-popup-close:hover {
